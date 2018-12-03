@@ -1,10 +1,4 @@
 'use strict';
-var comm = ['Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
 // Для лайков
 var getRandomNum = function (min, max) {
@@ -13,8 +7,13 @@ var getRandomNum = function (min, max) {
 
 // Для комментов
 var getRandomComment = function () {
-  var randomComm = Math.floor(Math.random() * comm.length);
-  return comm[randomComm];
+  var comment = ['Всё отлично!',
+    'В целом всё неплохо. Но не всё.',
+    'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+    'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+    'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
+  return comment[Math.floor(Math.random() * comment.length)];
 };
 
 var getRandomCommentTwice = function () {
@@ -22,28 +21,23 @@ var getRandomCommentTwice = function () {
 };
 
 var getComment = function () {
-  var randomNum = getRandomNum(0, 101);
-  if (randomNum < 50) {
-    return getRandomComment();
-  } else {
-    return getRandomCommentTwice();
-  }
+  return getRandomNum(0, 101) < 50 ? getRandomComment() : getRandomCommentTwice();
 };
 
-// Для descr
-var description = ['Тестим новую камеру!',
-  'Затусили с друзьями на море',
-  'Как же круто тут кормят',
-  'Отдыхаем...',
-  'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......',
-  'Вот это тачка!'];
-var getRandomDescr = function () {
-  var randomDescr = Math.floor(Math.random() * description.length);
-  return description[randomDescr];
+// Для description
+var getRandomDescription = function () {
+  var description = ['Тестим новую камеру!',
+    'Затусили с друзьями на море',
+    'Как же круто тут кормят',
+    'Отдыхаем...',
+    'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......',
+    'Вот это тачка!'];
+  return description[Math.floor(Math.random() * description.length)];
 };
 
-var getUrl = function () {
-  return 'photos/' + (i + 1) + '.jpg';
+// Для url
+var getUrl = function (k) {
+  return 'photos/' + k + '.jpg';
 };
 
 var picturesData = [];
@@ -52,7 +46,7 @@ for (var i = 0; i <= 25; i++) {
   picturesData[i].url = getUrl(i);
   picturesData[i].likes = getRandomNum(15, 200);
   picturesData[i].comments = getComment();
-  picturesData[i].description = getRandomDescr();
+  picturesData[i].description = getRandomDescription();
 }
 
 var picturesTemplate = document.querySelector('#picture')
@@ -65,10 +59,11 @@ var getAllPictures = function (picData) {
   elemPicture.querySelector('.picture__likes').textContent = picData.likes;
   elemPicture.querySelector('.picture__comments').textContent = picData.length;
   return elemPicture;
-}
+};
+
 var fragment = document.createDocumentFragment();
-for (var i = 0; i < picturesData.length; i++) {
-  fragment.appendChild(getAllPictures(picturesData[i]));
+for (var j = 1; i < picturesData.length; j++) {
+  fragment.appendChild(getAllPictures(picturesData[j]));
 }
 pictures.appendChild(fragment);
 
@@ -77,5 +72,9 @@ bigPicture.classList.remove('hidden');
 
 bigPicture.querySelector('.big-picture__img').setAttribute('src', picturesData[1]);
 bigPicture.querySelector('.likes-count').textContent = picturesData[1].likes;
-bigPicture.querySelector('.comments-count').textContent = picturesData[1].comments;
+bigPicture.querySelector('.comments-count').textContent = picturesData[1].comments.length;
 bigPicture.querySelector('.social__caption').textContent = picturesData[1].description;
+
+document.querySelector('.social__comment-count').classList.add('visually-hidden');
+document.querySelector('.comments-loader').classList.add('visually-hidden');
+
