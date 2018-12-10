@@ -92,9 +92,6 @@ for (var l = 0; l < nodeList.length; l++) {
   });
 }*/
 
-
-
-
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
 
@@ -102,7 +99,6 @@ var uploadFile = document.querySelector('#upload-file');
 var closePopup = document.querySelector('#upload-cancel');
 var uploadOverlay = document.querySelector('.img-upload__overlay');
 var pinEffect = document.querySelector('.effect-level__pin');
-var bigPicture1 = document.querySelector('.big-picture');
 
 // Загрузка фото с котиком
 uploadFile.addEventListener('change', function () {
@@ -129,7 +125,7 @@ pinEffect.addEventListener('mouseup', function () {
 
 var imgPreview = document.querySelector('.img-upload__preview').querySelector('img');
 
-var effectLabel = document.querySelector('.effects__label');
+// var effectLabel = document.querySelector('.effects__label');
 var effectValue = document.querySelector('.effect-level__value');
 
 var originalEffect = document.querySelector('.effects__preview--none');
