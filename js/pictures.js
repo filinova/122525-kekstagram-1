@@ -72,7 +72,7 @@ document.querySelector('.social__comment-count').classList.add('visually-hidden'
 document.querySelector('.comments-loader').classList.add('visually-hidden');
 
 var uploadFile = document.querySelector('#upload-file');
-var closePopup = document.querySelector('#upload-cancel');
+var closePopup = document.querySelector('.img-upload__cancel');
 var uploadOverlay = document.querySelector('.img-upload__overlay');
 var bigPictureCancel = document.querySelector('.big-picture__cancel');
 var pinEffect = document.querySelector('.effect-level__pin');
